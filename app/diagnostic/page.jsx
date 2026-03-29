@@ -248,7 +248,7 @@ export default function DiagnosticPage() {
         const f = sessionStorage.getItem("reine_fiche")
         if (f) setFiche(f)
       }
-    } catch (e) {}
+    } catch (_e) {}
   }, [])
 
   const handleClosedNext = () => {
@@ -293,10 +293,10 @@ export default function DiagnosticPage() {
       const data = await res.json()
       if (!res.ok) throw new Error(JSON.stringify(data.error))
       setReport(data.text)
-      try { sessionStorage.setItem("reine_rapport", data.text) } catch (e) {}
+      try { sessionStorage.setItem("reine_rapport", data.text) } catch (_e) {}
       setPhase("result")
       generateFiche(scores, openAnswers, intake, closedAnswers)
-    } catch (e) {
+    } catch (_e) {
       setError("Une erreur est survenue. Vérifie ta clé API dans le fichier .env.local")
       setPhase("open")
     }
@@ -318,9 +318,9 @@ export default function DiagnosticPage() {
       const data = await res.json()
       if (res.ok) {
         setFiche(data.text)
-        try { sessionStorage.setItem("reine_fiche", data.text) } catch (e) {}
+        try { sessionStorage.setItem("reine_fiche", data.text) } catch (_e) {}
       }
-    } catch (e) {}
+    } catch (_e) {}
     setFicheLoading(false)
   }
 
@@ -329,7 +329,7 @@ export default function DiagnosticPage() {
     setIntake({ prenom: "", email: "", situation: "", enfants: "", reve: "" })
     setOpenAnswers({ o1: "", o2: "", o3: "", o4: "", o5: "" })
     setOpenIdx(0); setReport(""); setFiche(""); setSelectedOption(null); setError("")
-    try { sessionStorage.removeItem("reine_rapport"); sessionStorage.removeItem("reine_fiche") } catch (e) {}
+    try { sessionStorage.removeItem("reine_rapport"); sessionStorage.removeItem("reine_fiche") } catch (_e) {}
   }
 
   return (
